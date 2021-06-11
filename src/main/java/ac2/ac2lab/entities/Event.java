@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -63,9 +63,8 @@ public class Event implements Serializable{
     @Column(name = "PRICETICKET")
     private Double priceTicket;
 
-    @ManyToOne
-    @JoinColumn(name = "ADMIN_USER_ID")
-    private Admin admin;
+    @Column(name = "ADMIN_USER_ID")
+    private Long admin;
 
     @ManyToMany
     @JoinTable(
@@ -74,6 +73,10 @@ public class Event implements Serializable{
         inverseJoinColumns = @JoinColumn(name="PLACE_ID")
     )
     private List<Place> places = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "event")
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Event() {
      
@@ -90,7 +93,31 @@ public class Event implements Serializable{
         this.amountFreeTickets = dto.getAmountFreeTickets();
         this.amountPayedTickets = dto.getAmountPayedTickets();
         this.priceTicket = dto.getPriceTicket();
+        this.admin = dto.getAdmin();
 	}
+
+    public Boolean hasTicket(String type){
+        long count = 0;
+
+        for(Ticket ticket : this.getTickets()){
+            if(ticket.getType().equals(type)){
+                count++;
+            }
+        }
+
+        if(type.equals("Free")){
+            if(count < this.getAmountFreeTickets()){
+                return true;
+            }
+        }
+        else{
+            if(count < this.getAmountPayedTickets()){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public Long getId() {
         return id;
@@ -180,11 +207,11 @@ public class Event implements Serializable{
         this.priceTicket = priceTicket;
     }
 
-    public Admin getAdmin() {
+    public Long getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Admin admin) {
+    public void setAdmin(Long admin) {
         this.admin = admin;
     }
 
@@ -194,6 +221,22 @@ public class Event implements Serializable{
 
     public void addPlace(Place place) {
         this.places.add(place);
+    }
+
+    public void removePlace(Place place){
+        this.places.remove(place);
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public void removeTicket(Ticket ticket){
+        this.tickets.remove(ticket);
     }
 
     @Override

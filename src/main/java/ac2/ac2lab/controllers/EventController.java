@@ -22,6 +22,9 @@ import ac2.ac2lab.dto.EventDTO;
 import ac2.ac2lab.dto.EventInsertDTO;
 import ac2.ac2lab.dto.EventUpdateDTO;
 import ac2.ac2lab.services.EventService;
+import ac2.ac2lab.entities.Attend;
+import ac2.ac2lab.entities.View;
+import ac2.ac2lab.dto.AttendTicketDTO;
 
 @RestController
 @RequestMapping("/events")
@@ -71,4 +74,36 @@ public class EventController {
 		EventDTO dto = eventService.update(id, updateDTO); 
 		return ResponseEntity.ok().body(dto);
 	}
+}
+
+@PostMapping("{id}/places/{place}")
+    public ResponseEntity<EventDTO> addPlace(@PathVariable Long id, @PathVariable Long place) {
+        EventDTO dto = eventService.addPlace(id, place);
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("{id}/places/{place}")
+	public ResponseEntity<Void> deletePlace(@PathVariable Long id, @PathVariable Long place){
+		eventService.removePlace(id, place); 
+		return ResponseEntity.noContent().build();
+	}
+
+    @GetMapping("{id}/tickets")
+    public ResponseEntity<View> getTickets(@PathVariable Long id) {
+        View view = eventService.getTickets(id);
+        return ResponseEntity.ok(view);
+    }
+
+    @PostMapping("{id}/tickets")
+    public ResponseEntity<Attend> insertTicket(@RequestBody AttendTicketDTO ticketDTO, @PathVariable Long id) {
+        Attend atd = eventService.insertTicket(ticketDTO, id);
+        return ResponseEntity.ok(atd);
+    }
+
+    @DeleteMapping("{id}/tickets")
+	public ResponseEntity<Void> deleteTickets(@PathVariable Long id){
+		eventService.deleteTickets(id); 
+		return ResponseEntity.noContent().build();
+	}
+
 }
