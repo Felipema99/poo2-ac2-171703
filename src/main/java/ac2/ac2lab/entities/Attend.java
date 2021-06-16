@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ac2.ac2lab.dto.AttendInsertDTO;
 
@@ -18,8 +19,8 @@ public class Attend extends BaseUser{
 
     private Double balance;
 
-    @OneToMany
-    @JoinColumn(name = "ATTEND_USER_ID")
+    @JsonIgnore
+    @OneToMany(mappedBy = "attend")
     private List<Ticket> tickets = new ArrayList<>();
 
     public Attend() {
@@ -28,8 +29,6 @@ public class Attend extends BaseUser{
 
     public Attend(AttendInsertDTO dto) {
         this.setName(dto.getName());
-        this.setEmail(dto.getEmail());
-        this.balance = dto.getBalance();
 	}
 
     public Double getBalance() {
@@ -38,6 +37,10 @@ public class Attend extends BaseUser{
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public void addBalance(Double balance) {
+        this.balance = this.balance + balance;
     }
 
     public List<Ticket> getTickets() {
