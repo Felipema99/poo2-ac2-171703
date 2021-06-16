@@ -2,15 +2,15 @@ package ac2.ac2lab.dto;
 
 public class AdminUpdateDTO {
 
-    private String email;
+    private String name;
     private String phoneNumber;
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoneNumber() {
