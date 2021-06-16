@@ -4,7 +4,7 @@ public class AttendInsertDTO {
     
     private String name;
     private String email;
-    private Double balance;
+    
 
     public String getName() {
         return name;
@@ -22,12 +22,6 @@ public class AttendInsertDTO {
         this.email = email;
     }
 
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
+   
 
 }
