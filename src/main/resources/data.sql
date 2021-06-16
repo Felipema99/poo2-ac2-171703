@@ -28,10 +28,10 @@ INSERT INTO TB_PLACES (id, name, address) VALUES (1, 'Endereço1', 'Ruanumero1')
 INSERT INTO TB_PLACES (id, name, address) VALUES (2, 'Endereço2', 'Ruanumero2');
 INSERT INTO TB_PLACES (id, name, address) VALUES (3, 'Endereço3', 'Ruanumero3');
 
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (1, 4, now(), 0, 'Free', 1);
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (2, 5, now(), 0, 'Free', 1);
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (3, 6, now(), 10, 'Payed', 1);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (1, 4, now(), 0, 'gratuito', 1);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (2, 5, now(), 0, 'gratuito', 1);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (3, 6, now(), 10, 'pago', 1);
 
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (4, 4, now(), 0, 'Free', 2);
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (5, 5, now(), 0, 'Free', 2);
-INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (6, 6, now(), 10, 'Free', 2);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (4, 4, now(), 0, 'gratuito', 2);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (5, 5, now(), 0, 'gratuito', 2);
+INSERT INTO TB_TICKETS (id, attend_user_id, date, price, type, event_id) VALUES (6, 6, now(), 10, 'gratuito', 2);
